@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 240" fill="none">
+  <defs>
+    <linearGradient id="dolphBody" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="35%" stop-color="#0284c7" />
+      <stop offset="70%" stop-color="#0369a1" />
+      <stop offset="100%" stop-color="#f0f9ff" />
+    </linearGradient>
+    <filter id="dolphGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#001535" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- Dolphin Body -->
+  <path d="M480,120 C450,110 410,95 360,90 C310,85 260,90 210,105 C170,118 130,140 90,165 C60,185 30,205 10,215 C5,200 15,185 30,170 C50,150 80,130 115,115 C155,95 200,80 250,70 C300,60 350,60 395,70 C430,78 460,95 485,108 C495,112 500,116 500,118 C500,120 492,122 480,120 Z" fill="url(#dolphBody)" filter="url(#dolphGlow)" />
+
+  <!-- Dorsal Fin -->
+  <path d="M280,72 C295,45 320,25 345,15 C345,30 335,50 325,65 Z" fill="#0284c7" />
+
+  <!-- Pectoral Fin (Flipper) -->
+  <path d="M320,115 C300,140 270,165 240,180 C245,160 265,135 295,115 Z" fill="#0369a1" opacity="0.9" />
+
+  <!-- White Underbelly Accent -->
+  <path d="M430,105 C380,100 320,110 260,130 C200,150 140,180 80,205 C130,175 190,145 250,125 C310,105 370,95 430,105 Z" fill="#ffffff" opacity="0.65" />
+
+  <!-- Tail Flukes -->
+  <path d="M25,175 C10,155 0,140 0,135 C5,150 15,170 25,185 Z" fill="#0284c7" />
+  <path d="M15,205 C5,220 0,230 0,235 C5,225 15,215 25,200 Z" fill="#0284c7" />
+
+  <!-- Eye & Smile -->
+  <circle cx="440" cy="100" r="3.5" fill="#082f49" />
+  <circle cx="441" cy="99" r="1.2" fill="#ffffff" />
+  <path d="M455,108 C465,112 475,115 480,116" stroke="#082f49" stroke-width="1.5" stroke-linecap="round" />
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 650" fill="none">
+  <defs>
+    <!-- Glowing bioluminescent gradients -->
+    <radialGradient id="jellyBellGrad" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95" />
+      <stop offset="25%" stop-color="#ff70a6" stop-opacity="0.85" />
+      <stop offset="60%" stop-color="#a855f7" stop-opacity="0.7" />
+      <stop offset="85%" stop-color="#06b6d4" stop-opacity="0.5" />
+      <stop offset="100%" stop-color="#0ea5e9" stop-opacity="0.1" />
+    </radialGradient>
+
+    <linearGradient id="tentaclePink" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff70a6" stop-opacity="0.9" />
+      <stop offset="40%" stop-color="#c084fc" stop-opacity="0.75" />
+      <stop offset="80%" stop-color="#38bdf8" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0.1" />
+    </linearGradient>
+
+    <linearGradient id="tentacleCyan" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8" stop-opacity="0.95" />
+      <stop offset="50%" stop-color="#a855f7" stop-opacity="0.7" />
+      <stop offset="100%" stop-color="#ec4899" stop-opacity="0.1" />
+    </linearGradient>
+
+    <filter id="jellyGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Outer Bioluminescent Aura -->
+  <ellipse cx="200" cy="180" rx="140" ry="110" fill="url(#jellyBellGrad)" opacity="0.35" filter="url(#jellyGlow)" />
+
+  <!-- Trailing Stinging Tentacles -->
+  <g stroke-linecap="round" filter="url(#jellyGlow)">
+    <path d="M120,240 C100,310 150,380 110,470 C90,530 130,590 100,640" stroke="url(#tentaclePink)" stroke-width="2.5" />
+    <path d="M140,250 C120,330 170,400 130,500 C110,560 150,610 130,650" stroke="url(#tentacleCyan)" stroke-width="3" />
+    <path d="M170,260 C150,340 190,420 160,520 C140,580 180,620 160,650" stroke="url(#tentaclePink)" stroke-width="2" />
+    <path d="M200,265 C180,350 220,440 190,530 C180,590 210,630 195,650" stroke="url(#tentacleCyan)" stroke-width="3.5" />
+    <path d="M230,260 C250,340 210,420 240,520 C260,580 220,620 240,650" stroke="url(#tentaclePink)" stroke-width="2" />
+    <path d="M260,250 C280,330 230,400 270,500 C290,560 250,610 270,650" stroke="url(#tentacleCyan)" stroke-width="3" />
+    <path d="M280,240 C300,310 250,380 290,470 C310,530 270,590 300,640" stroke="url(#tentaclePink)" stroke-width="2.5" />
+  </g>
+
+  <!-- Wavy Frilly Oral Arms (Central Bell Drapery) -->
+  <path d="M150,230 C130,290 190,340 160,420 C140,470 180,520 150,580 C170,530 150,470 175,420 C195,350 150,290 170,230 Z" fill="url(#tentaclePink)" opacity="0.65" />
+  <path d="M250,230 C270,290 210,340 240,420 C260,470 220,520 250,580 C230,530 250,470 225,420 C205,350 250,290 230,230 Z" fill="url(#tentacleCyan)" opacity="0.65" />
+  <path d="M190,240 C170,300 230,360 195,440 C175,500 215,550 185,610 C205,550 185,500 210,440 C235,360 180,300 210,240 Z" fill="#ffffff" opacity="0.45" />
+
+  <!-- Translucent Umbrella Bell Dome -->
+  <path d="M60,220 C60,110 120,60 200,60 C280,60 340,110 340,220 C340,235 320,245 295,235 C270,225 250,240 230,235 C210,230 190,230 170,235 C150,240 130,225 105,235 C80,245 60,235 60,220 Z" fill="url(#jellyBellGrad)" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.8" filter="url(#jellyGlow)" />
+
+  <!-- Inner Bell Organ Rings (Glowing rosettes) -->
+  <g opacity="0.85">
+    <ellipse cx="160" cy="150" rx="24" ry="18" fill="none" stroke="#ffffff" stroke-width="2.5" filter="url(#jellyGlow)" />
+    <ellipse cx="240" cy="150" rx="24" ry="18" fill="none" stroke="#ffffff" stroke-width="2.5" filter="url(#jellyGlow)" />
+    <ellipse cx="200" cy="175" rx="22" ry="16" fill="none" stroke="#ff70a6" stroke-width="2" filter="url(#jellyGlow)" />
+    <ellipse cx="200" cy="130" rx="20" ry="14" fill="none" stroke="#38bdf8" stroke-width="2" filter="url(#jellyGlow)" />
+  </g>
+
+  <!-- Bell Rim Frills -->
+  <path d="M60,220 Q80,232 100,222 Q120,234 140,224 Q160,236 180,226 Q200,238 220,226 Q240,236 260,224 Q280,234 300,222 Q320,232 340,220" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.9" filter="url(#jellyGlow)" />
+</svg>

@@ -254,6 +254,233 @@
             "default": true
           }
         }
+      },
+      "AnalysisResultItem": {
+        "type": "object",
+        "required": [
+          "metric_name",
+          "metric_value",
+          "unit"
+        ],
+        "properties": {
+          "metric_name": {
+            "type": "string"
+          },
+          "metric_value": {
+            "type": "number"
+          },
+          "unit": {
+            "type": "string"
+          }
+        }
+      },
+      "ManifestItem": {
+        "type": "object",
+        "required": [
+          "observation_id"
+        ],
+        "properties": {
+          "observation_id": {
+            "type": "integer"
+          },
+          "revision_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "input_role": {
+            "type": "string",
+            "default": "primary"
+          }
+        }
+      },
+      "AnalysisResponse": {
+        "type": "object",
+        "required": [
+          "analysis_id",
+          "analysis_name",
+          "metric",
+          "status",
+          "created_at",
+          "query_version",
+          "input_count",
+          "results"
+        ],
+        "properties": {
+          "analysis_id": {
+            "type": "integer"
+          },
+          "analysis_name": {
+            "type": "string"
+          },
+          "metric": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "query_version": {
+            "type": "string"
+          },
+          "input_count": {
+            "type": "integer"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnalysisResultItem"
+            }
+          }
+        }
+      },
+      "AnalysisDetailResponse": {
+        "type": "object",
+        "required": [
+          "analysis_id",
+          "analysis_name",
+          "metric",
+          "query_version",
+          "filters",
+          "parameters",
+          "status",
+          "creator_id",
+          "created_at",
+          "input_count",
+          "results",
+          "manifest"
+        ],
+        "properties": {
+          "analysis_id": {
+            "type": "integer"
+          },
+          "analysis_name": {
+            "type": "string"
+          },
+          "metric": {
+            "type": "string"
+          },
+          "query_version": {
+            "type": "string"
+          },
+          "filters": {
+            "type": "object"
+          },
+          "parameters": {
+            "type": "object"
+          },
+          "status": {
+            "type": "string"
+          },
+          "creator_id": {
+            "type": "integer"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "input_count": {
+            "type": "integer"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnalysisResultItem"
+            }
+          },
+          "manifest": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ManifestItem"
+            }
+          }
+        }
+      },
+      "ReplayResponse": {
+        "type": "object",
+        "required": [
+          "analysis_id",
+          "replayed_at",
+          "original_results",
+          "replayed_results",
+          "matches",
+          "input_manifest_verified"
+        ],
+        "properties": {
+          "analysis_id": {
+            "type": "integer"
+          },
+          "replayed_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "original_results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnalysisResultItem"
+            }
+          },
+          "replayed_results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnalysisResultItem"
+            }
+          },
+          "matches": {
+            "type": "boolean"
+          },
+          "input_manifest_verified": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AuditEvent": {
+        "type": "object",
+        "required": [
+          "audit_id",
+          "entity_type",
+          "entity_id",
+          "action",
+          "event_time",
+          "details"
+        ],
+        "properties": {
+          "audit_id": {
+            "type": "integer"
+          },
+          "entity_type": {
+            "type": "string"
+          },
+          "entity_id": {
+            "type": "string"
+          },
+          "action": {
+            "type": "string"
+          },
+          "actor_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "event_time": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "details": {
+            "type": "object"
+          }
+        }
       }
     }
   },
@@ -483,6 +710,28 @@
           "404": {
             "description": "Observation not found"
           }
+        },
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "rule_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer"
+                    }
+                  },
+                  "include_temporal_checks": {
+                    "type": "boolean",
+                    "default": true
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -500,6 +749,57 @@
         "responses": {
           "201": {
             "description": "Rule created"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "parameter_code",
+                  "rule_type",
+                  "thresholds",
+                  "rule_version"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "parameter_code": {
+                    "type": "string",
+                    "enum": [
+                      "temperature",
+                      "salinity",
+                      "ph",
+                      "dissolved_oxygen"
+                    ]
+                  },
+                  "rule_type": {
+                    "type": "string",
+                    "enum": [
+                      "range",
+                      "gap",
+                      "rate_of_change",
+                      "stuck_sensor",
+                      "duplicate"
+                    ]
+                  },
+                  "thresholds": {
+                    "type": "object"
+                  },
+                  "rule_version": {
+                    "type": "string"
+                  },
+                  "is_active": {
+                    "type": "boolean",
+                    "default": true
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -562,9 +862,51 @@
     "/analyses": {
       "get": {
         "summary": "List analysis runs",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Analysis list"
+            "description": "Paginated analysis list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/AnalysisResponse"
+                      }
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       },
@@ -582,7 +924,14 @@
         },
         "responses": {
           "201": {
-            "description": "Analysis created"
+            "description": "Analysis created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalysisResponse"
+                }
+              }
+            }
           },
           "422": {
             "description": "Validation error"
@@ -605,7 +954,14 @@
         "summary": "Get analysis and input manifest",
         "responses": {
           "200": {
-            "description": "Analysis detail"
+            "description": "Analysis detail with frozen manifest",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnalysisDetailResponse"
+                }
+              }
+            }
           },
           "404": {
             "description": "Not found"
@@ -628,10 +984,20 @@
         "summary": "Replay using stored input versions",
         "responses": {
           "200": {
-            "description": "Replay comparison"
+            "description": "Replay comparison result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplayResponse"
+                }
+              }
+            }
           },
           "404": {
             "description": "Analysis not found"
+          },
+          "422": {
+            "description": "Calculation version unsupported or deprecated"
           }
         }
       }
@@ -651,7 +1017,7 @@
             "name": "entity_id",
             "in": "query",
             "schema": {
-              "type": "integer"
+              "type": "string"
             }
           },
           {
@@ -669,11 +1035,87 @@
               "type": "string",
               "format": "date-time"
             }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 1
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "default": 50
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Audit event list"
+            "description": "Audit event list",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/AuditEvent"
+                      }
+                    },
+                    "page": {
+                      "type": "integer"
+                    },
+                    "page_size": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/token": {
+      "post": {
+        "security": [],
+        "summary": "Generate Bearer JWT access token",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "username",
+                  "password"
+                ],
+                "properties": {
+                  "username": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Token issued successfully"
+          },
+          "401": {
+            "description": "Invalid credentials"
           }
         }
       }
