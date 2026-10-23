@@ -420,6 +420,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterConsole }) => {
       <section id="database-core" className="bbc-chapter-section">
         {/* Authentic BBC Sea Creatures throughout Chapter 4 */}
         <img src="/landing/left-fish-1.webp" alt="Abyssal Benthic Fish" className="bbc-fish-chap4" />
+        <img src="/landing/right-fish-2.webp" alt="Deep Pelagic Fish" className="bbc-fish-chap4-right" />
 
         <div className="bbc-container">
           <div className="bbc-chapter-header">
@@ -465,24 +466,36 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterConsole }) => {
       </section>
 
       {/* --------------------------------------------------------------------
-          Footer Video Section & Big Launch CTA
+          Footer Section — Exact BBC StoryWorks Replication with Vibrant Whale
           -------------------------------------------------------------------- */}
       <footer className="bbc-footer-section">
+        {/* Top ocean feather blending from chapter 4 into #01144a */}
+        <div className="bbc-footer-feather"></div>
+
+        {/* BBC Footer Background Video with the Swimming Whale & Shipwreck */}
         <video
           className="bbc-footer-video-bg"
           autoPlay
           loop
           muted
           playsInline
+          poster="/landing/footer_poster.jpg"
         >
           <source src="/landing/footer_video.mp4" type="video/mp4" />
         </video>
 
         <div className="bbc-footer-content">
-          <div className="bbc-chapter-tag" style={{ color: '#ffffff' }}>Experience The Platform</div>
-          <h2 className="bbc-footer-title">Dive into the TideTrace Console</h2>
+          <div className="bbc-compliance-badge" style={{ marginBottom: '16px' }}>
+            <span className="bbc-compliance-subtext">Ocean Data Integrity Initiative</span>
+            <div className="bbc-brand-logo" style={{ fontSize: '15px' }}>
+              <span className="bbc-brand-dot"></span>
+              tidetrace consortium
+            </div>
+          </div>
+
+          <h2 className="bbc-footer-title">A Shared Vision for Ocean Data Integrity</h2>
           <p className="bbc-footer-subtitle">
-            Interact with live ingestion streams, run automated QC pipelines, execute deterministic historical replays, and inspect the PostgreSQL relational catalog.
+            With TideTrace&apos;s immutable relational provenance and PostgreSQL relational foundation, global marine research organizations hold an unyielding framework for verifying environmental sensor baselines from surface buoys to the benthic abyss.
           </p>
 
           <button className="bbc-big-cta-btn" onClick={() => onEnterConsole('dashboard')}>
@@ -495,10 +508,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterConsole }) => {
 
         <div className="bbc-footer-bar">
           <div>
-            <strong>TideTrace</strong> — Ocean Data Provenance and Integrity Platform
+            <strong>TideTrace</strong> &bull; Provenance-Aware Ocean Database Management System
           </div>
           <div>
-            PostgreSQL 18.6 • FastAPI • SQLAlchemy 2.0 • React + Vite
+            PostgreSQL 18.6 &bull; FastAPI &bull; SQLAlchemy 2.0 &bull; React + Vite
           </div>
         </div>
       </footer>
